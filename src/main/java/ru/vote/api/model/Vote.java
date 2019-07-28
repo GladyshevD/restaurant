@@ -1,29 +1,42 @@
 package ru.vote.api.model;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
+@Entity
+@Table(name = "votes")
 public class Vote extends AbstractBaseEntity {
-    private LocalDateTime date;
 
+    @Column(name = "date_time", nullable = false, columnDefinition = "timestamp default now")
+    @NotNull
+    private Date date = new Date();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @NotNull
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id", nullable = false)
+    @NotNull
     private Menu menu;
 
     public Vote() {
     }
 
-    public Vote(Integer id, LocalDateTime date, User user, Menu menu) {
+    public Vote(Integer id, User user, Menu menu) {
         super(id);
-        this.date = date;
+        this.date = new Date();
         this.user = user;
         this.menu = menu;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

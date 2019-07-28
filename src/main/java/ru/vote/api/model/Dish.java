@@ -1,9 +1,20 @@
 package ru.vote.api.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"name" , "menu_id"},
+        name = "dishes_unique_name_menu_idx")})
 public class Dish extends AbstractNamedEntity {
 
+    @Column(name = "price", nullable = false)
+    @NotNull
     private Integer price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id", nullable = false)
+    @NotNull
     private Menu menu;
 
     public Dish() {

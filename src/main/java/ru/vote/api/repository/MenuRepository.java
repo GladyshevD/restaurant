@@ -1,19 +1,27 @@
 package ru.vote.api.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.vote.api.model.Menu;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
 public class MenuRepository {
 
-    public List<Menu> getByDate(LocalDateTime dateTime) {
-        return null;
+    private final CrudMenuRepository crudMenuRepository;
+
+    @Autowired
+    public MenuRepository(CrudMenuRepository crudMenuRepository) {
+        this.crudMenuRepository = crudMenuRepository;
     }
 
-    public Menu add(Menu menu) {
+    public List<Menu> getByDate(LocalDate date) {
+        return crudMenuRepository.findByDate(date);
+    }
+
+    public Menu save(Menu menu) {
         return null;
     }
 

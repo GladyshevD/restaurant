@@ -7,7 +7,6 @@ import java.util.List;
 
 @Repository
 public class RestaurantRepository {
-
     public List<Restaurant> getAllEnabled() {
         return null;
     }

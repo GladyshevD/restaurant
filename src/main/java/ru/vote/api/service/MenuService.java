@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.vote.api.model.Menu;
 import ru.vote.api.repository.MenuRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,8 +18,8 @@ public class MenuService {
         this.repository = repository;
     }
 
-    public List<Menu> getByDate(LocalDateTime dateTime) {
-        return null;
+    public List<Menu> getByDate(LocalDate date) {
+        return repository.getByDate(date);
     }
 
     public Menu save(Menu menu) {

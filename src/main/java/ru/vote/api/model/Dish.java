@@ -1,10 +1,13 @@
 package ru.vote.api.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"name" , "menu_id"},
+@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "menu_id"},
         name = "dishes_unique_name_menu_idx")})
 public class Dish extends AbstractNamedEntity {
 
@@ -15,6 +18,7 @@ public class Dish extends AbstractNamedEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id", nullable = false)
     @NotNull
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Menu menu;
 
     public Dish() {

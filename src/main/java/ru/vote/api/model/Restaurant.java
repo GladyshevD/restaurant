@@ -1,5 +1,7 @@
 package ru.vote.api.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import java.util.Date;
 public class Restaurant extends AbstractNamedEntity {
 
     @Column(name = "added", nullable = false, columnDefinition = "timestamp default now()")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     @NotNull
     private Date added = new Date();
 

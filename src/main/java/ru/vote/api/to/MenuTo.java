@@ -1,7 +1,6 @@
 package ru.vote.api.to;
 
 import ru.vote.api.model.Dish;
-import ru.vote.api.model.Restaurant;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -11,11 +10,11 @@ public class MenuTo {
 
     private final LocalDateTime date;
 
-    private final Restaurant restaurant;
+    private final String restaurant;
 
     private final Set<Dish> dishes;
 
-    public MenuTo(Integer id, LocalDateTime date, Restaurant restaurant, Set<Dish> dishes) {
+    public MenuTo(Integer id, LocalDateTime date, String restaurant, Set<Dish> dishes) {
         this.id = id;
         this.date = date;
         this.restaurant = restaurant;
@@ -30,7 +29,7 @@ public class MenuTo {
         return date;
     }
 
-    public Restaurant getRestaurant() {
+    public String getRestaurant() {
         return restaurant;
     }
 

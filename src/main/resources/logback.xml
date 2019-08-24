@@ -5,7 +5,7 @@
     <jmxConfigurator/>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>${RESTAURANT_ROOT}/log/restaurant.log</file>
+        <file>/home/dimas/java/projects/restaurant/log/restaurant.log</file>
 
         <encoder>
             <charset>UTF-8</charset>

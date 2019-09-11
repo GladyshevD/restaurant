@@ -1,33 +1,36 @@
 package ru.vote.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "menu_id"},
-        name = "dishes_unique_name_menu_idx")})
-public class Dish extends AbstractNamedEntity {
+@Table(name = "dishes")
+public class Dish extends AbstractBaseEntity {
 
     @Column(name = "price", nullable = false)
     @NotNull
     private Integer price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id", nullable = false)
+    @JoinColumn(name = "restaurant_id", nullable = false)
     @NotNull
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Menu menu;
+    @JsonIgnore
+    private Restaurant restaurant;
 
     public Dish() {
     }
 
-    public Dish(Integer id, String name, Integer price, Menu menu) {
-        super(id, name);
-        this.price = price;
-        this.menu = menu;
+    public Dish(@NotBlank @Size(min = 2, max = 100) String name, @NotNull Integer price, @NotNull Restaurant restaurant) {
+        super(name);
+        this.price = price * 100;
+        this.restaurant = restaurant;
     }
 
     public Integer getPrice() {
@@ -38,11 +41,11 @@ public class Dish extends AbstractNamedEntity {
         this.price = price * 100;
     }
 
-    public Menu getMenu() {
-        return menu;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

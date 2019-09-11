@@ -1,26 +1,22 @@
-INSERT INTO users (NAME, EMAIL, PASSWORD)
-VALUES ('Admin', 'admin@gmail.com', 'admin'),
-       ('User', 'user@yandex.ru', 'password');
+INSERT INTO users (ID, NAME, EMAIL, PASSWORD)
+VALUES (1, 'Admin', 'admin@gmail.com', 'admin'),
+       (2, 'User', 'user@yandex.ru', 'password');
 
 
 INSERT INTO user_roles (USER_ID, ROLE)
-VALUES (100000, 'ROLE_USER'),
-       (100001, 'ROLE_ADMIN');
+VALUES (1, 'ROLE_USER'),
+       (1, 'ROLE_ADMIN'),
+       (2, 'ROLE_USER');
 
 INSERT INTO restaurants (ID, NAME)
-VALUES (100002, 'Restaurant1'),
-       (100003, 'Restaurant2'),
-       (100004, 'Restaurant3');
+VALUES (3, 'Restaurant1'),
+       (4, 'Restaurant2'),
+       (5, 'Restaurant3');
 
-INSERT INTO menu (ID, RESTAURANT_ID)
-VALUES (100005, 100002),
-       (100006, 100003),
-       (100007, 100004);
-
-INSERT INTO dishes (NAME, PRICE, MENU_ID)
-VALUES ('Dish1', 10000, 100005),
-       ('Dish2', 1000, 100005),
-       ('Dish3', 500, 100006),
-       ('Dish4', 10015, 100006),
-       ('Dish5', 200, 100007),
-       ('Dish6', 1018, 100007)
+INSERT INTO dishes (ID, NAME, PRICE, RESTAURANT_ID)
+VALUES (6, 'Dish1', 10000, 3),
+       (7, 'Dish2', 1000, 3),
+       (8, 'Dish3', 500, 4),
+       (9, 'Dish4', 10015, 4),
+       (10, 'Dish5', 200, 5),
+       (11, 'Dish6', 1018, 5)

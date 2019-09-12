@@ -10,7 +10,7 @@ import java.util.Set;
         {@UniqueConstraint(columnNames = "name", name = "restaurants_unique_name_idx")})
 public class Restaurant extends AbstractBaseEntity {
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     private Set<Dish> dishes;
 
     public Restaurant() {

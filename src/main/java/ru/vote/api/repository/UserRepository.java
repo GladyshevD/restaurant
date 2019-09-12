@@ -11,10 +11,10 @@ import java.util.List;
 public class UserRepository {
     private static final Sort SORT_NAME_EMAIL = new Sort(Sort.Direction.ASC, "name", "email");
 
-    private final CrudUserRepository crudRepository;
+    private final UserCrudRepository crudRepository;
 
     @Autowired
-    public UserRepository(CrudUserRepository crudRepository) {
+    public UserRepository(UserCrudRepository crudRepository) {
         this.crudRepository = crudRepository;
     }
 

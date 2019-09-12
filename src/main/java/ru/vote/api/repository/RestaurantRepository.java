@@ -1,6 +1,7 @@
 package ru.vote.api.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.vote.api.model.Restaurant;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Repository
 public class RestaurantRepository {
+    private static final Sort SORT_RESTAURANTS = new Sort(Sort.Direction.ASC, "name");
 
     private final RestaurantCrudRepository crudRepository;
 
@@ -17,12 +19,12 @@ public class RestaurantRepository {
         this.crudRepository = crudRepository;
     }
 
-    public List<Restaurant> getAll() {
-        return crudRepository.getAll(LocalDateTime.now());
+    public List<Restaurant> getAllByDates(LocalDateTime startDate, LocalDateTime endDate) {
+        return crudRepository.getAllWithDishesByDate(startDate, endDate);
     }
 
     public Restaurant save(Restaurant restaurant) {
-        if (!restaurant.isNew() && crudRepository.findById(restaurant.getId()).orElse(null) == null) {
+        if (!restaurant.isNew()) {
             return null;
         }
         return crudRepository.save(restaurant);
@@ -30,5 +32,9 @@ public class RestaurantRepository {
 
     public boolean delete(int id) {
         return crudRepository.delete(id) != 0;
+    }
+
+    public List<Restaurant> getAll() {
+        return crudRepository.findAll(SORT_RESTAURANTS);
     }
 }

@@ -22,6 +22,7 @@ public interface RestaurantCrudRepository extends JpaRepository<Restaurant, Inte
     @Transactional
     Restaurant save(Restaurant restaurant);
 
-    @Query("SELECT r FROM Restaurant r ")
-    List<Restaurant> getAll(@Param("date") LocalDateTime date);
+    @SuppressWarnings("JpaQlInspection")
+    @Query("SELECT DISTINCT r FROM Restaurant r INNER JOIN FETCH r.dishes d WHERE d.added BETWEEN :startDate AND :endDate ORDER BY r.name")
+    List<Restaurant> getAllWithDishesByDate(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 }

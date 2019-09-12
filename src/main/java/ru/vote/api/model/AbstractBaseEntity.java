@@ -1,8 +1,10 @@
 package ru.vote.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
+import ru.vote.api.util.DateTimeUtil;
 import ru.vote.api.web.HasId;
 
 import javax.persistence.*;
@@ -31,8 +33,8 @@ public abstract class AbstractBaseEntity implements HasId {
 
     @Column(name = "added", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
+    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     @JsonIgnore
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime added = LocalDateTime.now();
 
     public AbstractBaseEntity() {

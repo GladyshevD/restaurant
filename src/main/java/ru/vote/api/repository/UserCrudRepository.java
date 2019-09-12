@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.vote.api.model.User;
 
 @Transactional(readOnly = true)
-public interface CrudUserRepository extends JpaRepository<User, Integer> {
+public interface UserCrudRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Modifying
     @Query("DELETE FROM User u WHERE u.id=:id")

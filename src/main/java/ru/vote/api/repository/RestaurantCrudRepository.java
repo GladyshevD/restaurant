@@ -1,5 +1,6 @@
 package ru.vote.api.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,6 +24,6 @@ public interface RestaurantCrudRepository extends JpaRepository<Restaurant, Inte
     Restaurant save(Restaurant restaurant);
 
     @SuppressWarnings("JpaQlInspection")
-    @Query("SELECT DISTINCT r FROM Restaurant r INNER JOIN FETCH r.dishes d WHERE d.added BETWEEN :startDate AND :endDate ORDER BY r.name")
+    @Query("SELECT DISTINCT r FROM Restaurant r JOIN FETCH r.dishes d WHERE d.added BETWEEN :startDate AND :endDate ORDER BY r.name")
     List<Restaurant> getAllWithDishesByDate(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 }

@@ -57,8 +57,8 @@ public class AdminService {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
-    public void update(Restaurant restaurant, int id) {
+    public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
-        checkNotFoundWithId(repository.save(restaurant), id);
+        checkNotFoundWithId(repository.save(restaurant), restaurant.getId());
     }
 }

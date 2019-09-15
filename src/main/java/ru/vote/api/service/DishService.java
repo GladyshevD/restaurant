@@ -8,7 +8,6 @@ import org.springframework.util.Assert;
 import ru.vote.api.model.Dish;
 import ru.vote.api.repository.DishRepository;
 
-import static ru.vote.api.util.ValidationUtil.checkNew;
 import static ru.vote.api.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
@@ -22,19 +21,19 @@ public class DishService {
         this.repository = repository;
     }
 
-    public Dish create(Dish dish, int id) {
-        checkNew(dish);
+    public Dish create(Dish dish, int restaurantId) {
         log.info("create {}", dish);
         Assert.notNull(dish, "dish must not be null");
-        return repository.save(dish, id);
+        dish.setRestaurant(repository.get(restaurantId));
+        return repository.save(dish);
     }
 
     public void delete(int id) {
         checkNotFoundWithId(repository.delete(id), id);
     }
 
-    public void update(Dish dish, int id) {
+    public void update(Dish dish) {
         Assert.notNull(dish, "dish must not be null");
-        checkNotFoundWithId(repository.save(dish, id), id);
+        checkNotFoundWithId(repository.update(dish), dish.getId());
     }
 }

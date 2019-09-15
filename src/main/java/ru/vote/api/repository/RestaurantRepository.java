@@ -24,9 +24,6 @@ public class RestaurantRepository {
     }
 
     public Restaurant save(Restaurant restaurant) {
-        if (!restaurant.isNew()) {
-            return null;
-        }
         return crudRepository.save(restaurant);
     }
 

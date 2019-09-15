@@ -14,6 +14,7 @@ import ru.vote.api.service.DishService;
 import java.net.URI;
 
 import static ru.vote.api.util.ValidationUtil.assureIdConsistent;
+import static ru.vote.api.util.ValidationUtil.checkNew;
 
 @RestController
 @RequestMapping(value = DishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,11 +30,12 @@ public class DishController {
 
     @PostMapping(value = "/{restaurantId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public ResponseEntity<Dish> add(@RequestBody Dish dish, @PathVariable int id) {
-        Dish created = service.create(dish, id);
+    public ResponseEntity<Dish> add(@RequestBody Dish dish, @PathVariable int restaurantId) {
+        checkNew(dish);
+        Dish created = service.create(dish, restaurantId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
+                .path(REST_URL + "/{restaurantId}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
@@ -48,9 +50,8 @@ public class DishController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Dish dish, @PathVariable int id) {
-        dish.setId(id);
         assureIdConsistent(dish, id);
         log.info("update {}", dish);
-        service.update(dish, id);
+        service.update(dish);
     }
 }

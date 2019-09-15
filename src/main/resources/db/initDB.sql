@@ -21,7 +21,7 @@ CREATE TABLE dishes
     name          VARCHAR(255)            NOT NULL,
     added         TIMESTAMP DEFAULT now() NOT NULL,
     price         INTEGER                 NOT NULL,
-    restaurant_id INTEGER                 NOT NULL,
+    restaurant_id INTEGER,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants (id) ON DELETE CASCADE
 );
 

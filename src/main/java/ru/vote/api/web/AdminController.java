@@ -73,9 +73,8 @@ public class AdminController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
-        restaurant.setId(id);
         assureIdConsistent(restaurant, id);
         log.info("update {}", restaurant);
-        service.update(restaurant, id);
+        service.update(restaurant);
     }
 }

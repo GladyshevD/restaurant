@@ -34,3 +34,11 @@
 #### Register new user
 `curl -s -X POST -d '{"name":"newUser","email":"newUser@yandex.ru","password":"newPassword"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/profile/register`
 
+#### Vote for restaurant with id=3
+`curl -s http://localhost:8080/rest/user/vote/3 --user user@yandex.ru:password`
+
+#### Get all votes for authorized user between dates
+`curl -s http://localhost:8080/rest/user/filter?startDate=2019-09-11&endDate=2019-09-12 --user user@yandex.ru:password`
+
+#### Get today votes for authorized user
+`curl -s http://localhost:8080/rest/user/votes/today --user user@yandex.ru:password`

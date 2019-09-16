@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "dishes")
-public class Dish extends AbstractBaseEntity {
+public class Dish extends AbstractNamedEntity {
 
     @Column(name = "price", nullable = false)
     @NotNull

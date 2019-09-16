@@ -10,6 +10,7 @@
         <http-basic/>
         <intercept-url pattern="/rest/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/profile/**" access="isAnonymous()"/>
+        <intercept-url pattern="/rest/user/**" access="isAuthenticated()"/>
         <csrf disabled="true"/>
     </http>
 

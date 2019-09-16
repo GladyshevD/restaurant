@@ -1,16 +1,13 @@
 package ru.vote.api.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.vote.api.util.DateTimeUtil;
 import ru.vote.api.web.HasId;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
@@ -26,11 +23,6 @@ public abstract class AbstractBaseEntity implements HasId {
     //  Proxy initialization when accessing its identifier managed now by JPA_PROXY_COMPLIANCE setting
     private Integer id;
 
-    @NotBlank
-    @Size(min = 2, max = 100)
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @Column(name = "added", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
@@ -40,13 +32,8 @@ public abstract class AbstractBaseEntity implements HasId {
     public AbstractBaseEntity() {
     }
 
-    public AbstractBaseEntity(Integer id, String name) {
-        this.name = name;
+    public AbstractBaseEntity(Integer id) {
         this.id = id;
-    }
-
-    public AbstractBaseEntity(String name) {
-        this.name = name;
     }
 
     @Override
@@ -57,14 +44,6 @@ public abstract class AbstractBaseEntity implements HasId {
     @Override
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public LocalDateTime getAdded() {

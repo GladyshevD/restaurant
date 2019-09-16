@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "restaurants", uniqueConstraints =
         {@UniqueConstraint(columnNames = "name", name = "restaurants_unique_name_idx")})
-public class Restaurant extends AbstractBaseEntity {
+public class Restaurant extends AbstractNamedEntity {
 
     @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
     private Set<Dish> dishes;

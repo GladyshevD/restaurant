@@ -10,15 +10,15 @@
         <http-basic/>
         <intercept-url pattern="/rest/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/profile/**" access="isAnonymous()"/>
-        <intercept-url pattern="/rest/user/**" access="isAuthenticated()"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <csrf disabled="true"/>
     </http>
 
-    <beans:bean name="noopEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
+    <beans:bean class="org.springframework.security.crypto.factory.PasswordEncoderFactories" id="passwordEncoder" factory-method="createDelegatingPasswordEncoder"/>
 
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
-            <password-encoder ref="noopEncoder"/>
+            <password-encoder ref="passwordEncoder"/>
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

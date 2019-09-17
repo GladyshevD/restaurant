@@ -51,30 +51,38 @@ public class VoteService {
         return restaurantRepository.getAllByDates(startDateTime, endDateTime);
     }
 
-    public List<Vote> getVotesBetweenDates(@Nullable LocalDate startDate, @Nullable LocalDate endDate) {
-        return getVotesBetweenDateTimes(adjustStartDateTime(startDate), adjustEndDateTime(endDate));
+    public Vote getVoteBetweenDates(@Nullable LocalDate startDate, @Nullable LocalDate endDate) {
+        return getVoteBetweenDateTimes(adjustStartDateTime(startDate), adjustEndDateTime(endDate));
     }
 
-    private List<Vote> getVotesBetweenDateTimes(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    private Vote getVoteBetweenDateTimes(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         Assert.notNull(startDateTime, "startDateTime must not be null");
         Assert.notNull(endDateTime, "endDateTime  must not be null");
         int userId = SecurityUtil.authUserId();
-        return voteRepository.getAllByDates(startDateTime, endDateTime, userId);
+        return voteRepository.getToday(startDateTime, endDateTime, userId);
     }
 
-    public List<Vote> getVoteToday() {
-        return getVotesBetweenDates(LocalDate.now(), LocalDate.now());
+    public Vote getVoteToday() {
+        return getVoteBetweenDates(LocalDate.now(), LocalDate.now());
     }
 
-    public Vote create(int restaurantId) {
+    public Vote vote(int restaurantId) {
         int userId = SecurityUtil.authUserId();
+        Vote todayVote = getVoteToday();
         log.info("vote for {} by user {}", restaurantId, userId);
-        return checkVoteToday() && restaurantHasDishesToday(restaurantId) ?
-                voteRepository.save(new Vote(null, restaurantRepository.get(restaurantId), userRepository.get(userId))) : null;
+        if (restaurantHasDishesToday(restaurantId)) {
+            Vote newVote = new Vote(null, restaurantRepository.get(restaurantId), userRepository.get(userId));
+            if (todayVote == null) {
+                return voteRepository.save(newVote);
+            } else if (checkTime()) {
+                newVote.setId(todayVote.getId());
+                return voteRepository.save(newVote);
+            } else return null;
+        } else return null;
     }
 
-    private boolean checkVoteToday() {
-        return getVoteToday().isEmpty() || LocalTime.now().isBefore(LocalTime.of(11, 0, 0));
+    private boolean checkTime() {
+        return LocalTime.now().isBefore(LocalTime.of(11, 0, 0));
     }
 
     private boolean restaurantHasDishesToday(int restaurantId) {

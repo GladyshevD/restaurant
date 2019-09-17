@@ -3,6 +3,7 @@ package ru.vote.api.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.api.model.Restaurant;
 
 import java.time.LocalDateTime;
@@ -23,7 +24,11 @@ public class RestaurantRepository {
         return crudRepository.getAllWithDishesByDate(startDate, endDate);
     }
 
+    @Transactional
     public Restaurant save(Restaurant restaurant) {
+        if (!restaurant.isNew()) {
+            restaurant.setAdded(get(restaurant.getId()).getAdded());
+        }
         return crudRepository.save(restaurant);
     }
 

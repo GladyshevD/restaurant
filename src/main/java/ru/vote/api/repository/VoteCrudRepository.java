@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.vote.api.model.Vote;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Transactional(readOnly = true)
 public interface VoteCrudRepository extends JpaRepository<Vote, Integer> {
@@ -18,7 +17,7 @@ public interface VoteCrudRepository extends JpaRepository<Vote, Integer> {
 
     @SuppressWarnings("JpaQlInspection")
     @Query("SELECT v FROM Vote v WHERE v.user.id = :userId AND v.added BETWEEN :startDate AND :endDate")
-    List<Vote> getAllWithDishesByDate(@Param("startDate") LocalDateTime startDate,
-                                      @Param("endDate") LocalDateTime endDate,
-                                      @Param("userId") int userId);
+    Vote getAllWithDishesByDate(@Param("startDate") LocalDateTime startDate,
+                                @Param("endDate") LocalDateTime endDate,
+                                @Param("userId") int userId);
 }

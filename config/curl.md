@@ -6,10 +6,10 @@
 `curl -s http://localhost:8080/rest/admin/restaurants/ --user admin@gmail.com:admin`
 #### Add new restaurant
 `curl -s -X POST -d '{"name":"Restaurant4"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/admin/restaurants --user admin@gmail.com:admin`
-#### Delete restaurant 3
+#### Delete restaurant with id=3
 `curl -s -X DELETE http://localhost:8080/rest/admin/restaurants/3 --user admin@gmail.com:admin`
-#### Update restaurant 3
-`curl -s -X PUT -d '{"name":"NewRestaurant"}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/restaurants/3 --user admin@gmail.com:admin`
+#### Update restaurant with id=4
+`curl -s -X PUT -d '{"name":"NewRestaurant"}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/restaurants/4 --user admin@gmail.com:admin`
 #### Get all restaurants with today menu
 `curl -s http://localhost:8080/rest/admin/restaurants/today --user admin@gmail.com:admin`
 #### Filter all restaurants with menu between dates
@@ -29,7 +29,7 @@
 
 
 #### Get all users
-`curl -s http://localhost:8080/rest/admin/users/ --user admin@gmail.com:admin`
+`curl -s http://localhost:8080/rest/admin/users --user admin@gmail.com:admin`
 #### Get user by id=2
 `curl -s http://localhost:8080/rest/admin/users/2 --user admin@gmail.com:admin`
 #### Delete user with id=2

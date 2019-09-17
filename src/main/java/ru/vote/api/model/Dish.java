@@ -3,7 +3,6 @@ package ru.vote.api.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import ru.vote.api.web.View;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -20,7 +19,7 @@ public class Dish extends AbstractNamedEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    @NotNull(groups = View.Persist.class)
+    @NotNull
     @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
@@ -34,12 +33,12 @@ public class Dish extends AbstractNamedEntity {
         this.restaurant = restaurant;
     }
 
-    public Integer getPrice() {
-        return price / 100;
+    public float getPrice() {
+        return (float) (price / 100);
     }
 
-    public void setPrice(Integer price) {
-        this.price = price * 100;
+    public void setPrice(float price) {
+        this.price = (int) (price * 100);
     }
 
     public Restaurant getRestaurant() {

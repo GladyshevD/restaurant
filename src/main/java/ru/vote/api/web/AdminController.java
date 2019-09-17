@@ -21,9 +21,7 @@ import static ru.vote.api.util.ValidationUtil.assureIdConsistent;
 @RequestMapping(value = AdminController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminController {
     static final String REST_URL = "rest/admin/restaurants";
-
     protected final Logger log = LoggerFactory.getLogger(getClass());
-
     private final AdminService service;
 
     @Autowired

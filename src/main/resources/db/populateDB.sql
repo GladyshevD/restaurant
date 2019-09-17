@@ -14,12 +14,12 @@ VALUES (3, 'Restaurant1'),
        (5, 'Restaurant3');
 
 INSERT INTO dishes (ID, NAME, PRICE, RESTAURANT_ID)
-VALUES (6, 'Dish1', 10000, 3),
-       (7, 'Dish2', 1000, 3),
-       (8, 'Dish3', 500, 4),
-       (9, 'Dish4', 10015, 4),
-       (10, 'Dish5', 200, 5),
-       (11, 'Dish6', 1018, 5);
+VALUES (6, 'Dish1', 10020, 3),
+       (7, 'Dish2', 1040, 3),
+       (8, 'Dish3', 50005, 4),
+       (9, 'Dish4', 11217, 4),
+       (10, 'Dish5', 23956, 5),
+       (11, 'Dish6', 10180, 5);
 
 INSERT INTO dishes (ID, NAME, ADDED, PRICE, RESTAURANT_ID)
 VALUES (12, 'Dish7', '2019-09-10 06:00:00', 1000, 3),

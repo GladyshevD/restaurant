@@ -17,11 +17,9 @@ import ru.vote.api.to.UserTo;
 import ru.vote.api.util.UserUtil;
 import ru.vote.api.web.AuthorizedUser;
 
-
 import java.util.List;
 
 import static ru.vote.api.util.UserUtil.prepareToSave;
-import static ru.vote.api.util.ValidationUtil.checkNotFound;
 import static ru.vote.api.util.ValidationUtil.checkNotFoundWithId;
 
 
@@ -52,11 +50,6 @@ public class UserService implements UserDetailsService {
 
     public User get(int id) {
         return checkNotFoundWithId(repository.get(id), id);
-    }
-
-    public User getByEmail(String email) {
-        Assert.notNull(email, "email must not be null");
-        return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 
     @Cacheable("users")

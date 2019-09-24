@@ -51,7 +51,7 @@ public class VoteService {
         return restaurantRepository.getAllByDates(startDateTime, endDateTime);
     }
 
-    public Vote getVoteBetweenDates(@Nullable LocalDate startDate, @Nullable LocalDate endDate) {
+    private Vote getVoteBetweenDates(@Nullable LocalDate startDate, @Nullable LocalDate endDate) {
         return getVoteBetweenDateTimes(adjustStartDateTime(startDate), adjustEndDateTime(endDate));
     }
 

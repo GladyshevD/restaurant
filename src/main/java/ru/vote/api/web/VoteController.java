@@ -33,7 +33,7 @@ public class VoteController {
         return service.getDishesToday();
     }
 
-    @GetMapping(value = "/vote/{restaurantId}")
+    @GetMapping(value = "/voteRestaurant/{restaurantId}")
     public Vote vote(@PathVariable int restaurantId) {
         return service.vote(restaurantId);
     }

@@ -30,7 +30,7 @@ public abstract class AbstractBaseEntity implements HasId {
     public AbstractBaseEntity() {
     }
 
-    public AbstractBaseEntity(Integer id) {
+    AbstractBaseEntity(Integer id) {
         this.id = id;
     }
 

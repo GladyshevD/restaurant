@@ -55,9 +55,11 @@ Used Implementation Stack: Spring/SpringMVC/SpringDataJPA/Hibernate/HSQLDB/Sprin
 - Delete user with id=2
 `curl -s -X DELETE http://localhost:8080/rest/admin/users/2 --user admin@gmail.com:admin`
 
-**Vote system:**
+**Vote system for User actions:**
+- Get restaurants with dishes for voting today
+`curl -s http://localhost:8080/rest/user --user user@yandex.ru:password`
 - Vote for restaurant with id=3
-`curl -s http://localhost:8080/rest/user/vote/3 --user user@yandex.ru:password`
+`curl -s http://localhost:8080/rest/user/voteRestaurant/3 --user user@yandex.ru:password`
 - Get all votes for authorized user between dates
 `curl -s http://localhost:8080/rest/user/filter?startDate=2019-09-11&endDate=2019-09-12 --user user@yandex.ru:password`
 - Get today votes for authorized user

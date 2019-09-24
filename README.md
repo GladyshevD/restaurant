@@ -44,7 +44,7 @@ Used Implementation Stack: Spring/SpringMVC/SpringDataJPA/Hibernate/HSQLDB/Sprin
 - Update dish with id=7
 `curl -s -X PUT -d '{"name":"Барбекю","price":9660}' -H 'Content-Type: application/json' http://localhost:8080/rest/admin/dishes/7 --user admin@gmail.com:admin`
 
-**Register new user: **
+**Register new user:**
 `curl -s -X POST -d '{"name":"newUser","email":"newUser@yandex.ru","password":"newPassword"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/rest/profile/register`
 
 **Users administration:**
